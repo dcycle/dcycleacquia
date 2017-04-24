@@ -5,6 +5,7 @@ The Dcycle method for developing with Acquia cloud
  * The only local requirements are Docker and docker-compose.
  * Anything which requires specific software is done in a Docker container. For example: processing SASS, running PHPUnit tests.
  * We do not require a database for development, you can use a [site deployment module](http://blog.dcycle.com/blog/68).
+ * Two origins: acquia and github.
 
 Creating a new local environment
 -----
