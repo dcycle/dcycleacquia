@@ -19,7 +19,7 @@ do
   fi
 done
 
-OUTPUT=$(echo 'select * from users limit 1'|{ mysql --user=root --password=drupal --database=drupal --host=database 2>&1 || true; })
+OUTPUT=$(echo 'select * from users limit 1'|{ mysql --user=root --password=drupal --database=drupal --host=mysql 2>&1 || true; })
 if [[ "$OUTPUT" == *"ERROR"* ]]; then
   echo "Installing Drupal because we did not find an entry in the users table"
   # In order to prevent the "unable to send mail" error, we are including
