@@ -772,3 +772,5 @@ $settings['file_scan_ignore_directories'] = [
 if (file_exists('/var/www/site-php')) {
   require('/var/www/site-php/dcycleacquia/dcycleacquia-settings.inc');
 }
+$config_directories['vcs'] = $app_root . '/../config/' . basename($site_path);
+$settings['install_profile'] = 'standard';
