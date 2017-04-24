@@ -1,0 +1,22 @@
+# Set up the environment to perform builds on Circle CI.
+# We use Circle CI (https://circleci.com/gh/alberto56/dcycle-metrics) for
+# continuous integration: every new push to GitHub triggers a "Build" on Circle
+# CI. This file sets up the Circle CI environment with Docker and Docker
+# compose, and then runs the ./test.sh script, specifying the location of
+# environment variables needed by the Circle CI host.
+machine:
+  # See https://github.com/circleci/docker/issues/5.
+  pre:
+    - curl -sSL https://s3.amazonaws.com/circle-downloads/install-circleci-docker.sh | bash -s -- 1.10.0
+    # Starting January 18th, 2017, pip install no longer installs the correct
+    # version of Docker compose, using the workaround documented in:
+    # https://github.com/circleci/docker/issues/5#issuecomment-273545925
+    - curl -L https://github.com/docker/compose/releases/download/1.10.0/docker-compose-`uname -s`-`uname -m` > /home/ubuntu/bin/docker-compose
+    - chmod +x /home/ubuntu/bin/docker-compose
+    - docker-compose version
+  services:
+    - docker
+
+test:
+  override:
+    - echo 'RUNDRUPAL="docker-compose run --rm drupal /bin/bash -c"' >> settings.source.sh && ./scripts/test.sh

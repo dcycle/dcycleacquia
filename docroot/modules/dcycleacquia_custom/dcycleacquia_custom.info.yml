@@ -1,0 +1,4 @@
+name: Dcycle Metrics Custom
+description: Custom code for this site.
+type: module
+core: 8.x

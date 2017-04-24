@@ -1,0 +1,19 @@
+<?php
+/**
+ * @file
+ * site deployment install functions
+ */
+
+/**
+ * Implements hook_install().
+ */
+function dcycleacquia_deploy_install() {
+  // This module is designed to be enabled on a brand new instance of
+  // Drupal. Setting its uuid here will tell this instance that it is
+  // in fact the same site as any other instance. Therefore, all local
+  // instances, continuous integration, testing, dev, and production
+  // instances of a codebase will have the same uuid, enabling us to
+  // sync these instances via the config management system.
+  // See also https://www.drupal.org/node/2133325
+  dcycleacquia_deploy_set_uuid('d94dab3f-d4ee-410a-a9d9-dd628cfc50dc');
+}

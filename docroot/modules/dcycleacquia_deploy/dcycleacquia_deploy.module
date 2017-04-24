@@ -1,0 +1,47 @@
+<?php
+
+use Drupal\dcycleacquia_deploy\Selftest;
+
+/**
+ * @file
+ * Required module for the deploy module.
+ *
+ * See "What is a site deployment module?",
+ * http://blog.dcycle.com/blog/44/what-site-deployment-module/, and "An
+ * approach to code-driven development in Drupal 8",
+ * http://blog.dcycle.com/blog/68/approach-code-driven-development-drupal-8/
+ */
+
+/**
+ * Set the UUID of this website.
+ *
+ * By default, reinstalling a site will assign it a new random UUID, making
+ * it impossible to sync configuration with other instances. This function
+ * is called by site deployment module's .install hook.
+ *
+ * @param string $uuid
+ *   A uuid string, for example 'e732b460-add4-47a7-8c00-e4dedbb42900'.
+ */
+function dcycleacquia_deploy_set_uuid($uuid) {
+  \Drupal::configFactory()->getEditable('system.site')
+    ->set('uuid', $uuid)
+    ->save();
+}
+
+/**
+ * Make sure the site has been correctly deployed.
+ *
+ * Warning. This modifies the database and may be destructive. Do not
+ * run this function on production, only on throwaway continuous integration
+ * environments.
+ *
+ * Meant to be called from the command line:
+ *
+ *     (exit "$(./scripts/run-drupal.sh 'drush eval "echo dcycleacquia_deploy_selftest()"')")
+ *
+ * @return int
+ *   An exit code. 0 = no errors. Not 0 = errors.
+ */
+function dcycleacquia_deploy_selftest() {
+  return Selftest::instance()->run();
+}

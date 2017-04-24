@@ -1,0 +1,9 @@
+name: Dcycle Acquia Deploy
+description: Deployment module for this site. See http://blog.dcycle.com/blog/68.
+package: Custom
+
+dependencies:
+  - dcycleacquia_custom:dcycleacquia_custom
+
+type: module
+core: 8.x

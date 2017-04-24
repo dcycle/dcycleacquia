@@ -1,0 +1,30 @@
+<?php
+
+use Drupal\dcycleacquia_custom\DcycleAcquia;
+
+/**
+ * Implements hook_mail_alter().
+ */
+function dcycleacquia_custom_mail_alter(&$message) {
+  $message['send'] = FALSE;
+}
+
+/**
+ * Add a website to the system.s
+ *
+ * @param string $name
+ *   The website name; this does not necessarily have to be the URL.
+ * @param string $uuid
+ *   In case you want a specific UUID, you can specify it here. Otherwise use
+ *   NULL.
+ *
+ * @throws Exception
+ */
+function dcycleacquia_custom_add_site($name, $uuid = NULL) {
+  $info = ['website_title' => $name];
+  if ($uuid) {
+    $info['uuid'] = $uuid;
+  }
+
+  DcycleAcquia::instance()->createWebsite($info);
+}

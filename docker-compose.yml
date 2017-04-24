@@ -1,0 +1,35 @@
+# This is where we define how to set up a complete environment with
+# several linked containers to serve the project.
+version: '2'
+
+services:
+  # Drupal server
+  drupal:
+    build:
+      context: .
+      dockerfile: Dockerfile-drupal
+    volumes:
+      - "./docroot:/var/www/html"
+      - "./config:/var/www/config"
+    ports:
+      - "80"
+    links:
+      - mysql:mysql
+    working_dir: /var/www/html
+    restart: always
+
+  # Database server
+  mysql:
+    image: mysql
+    environment:
+      MYSQL_DATABASE: drupal
+      MYSQL_ROOT_PASSWORD: drupal
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'no'
+    volumes:
+      - "mysql:/var/lib/mysql"
+    ports:
+      - "3306"
+    restart: always
+
+volumes:
+  mysql:
