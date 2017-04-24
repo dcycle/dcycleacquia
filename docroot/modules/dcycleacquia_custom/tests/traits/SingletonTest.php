@@ -7,7 +7,7 @@
 
 use Drupal\dcycleacquia_custom\Singleton;
 
-require_once './containers/drupal-custom-modules/dcycleacquia_custom/src/Singleton.php';
+require_once './docroot/modules/dcycleacquia_custom/src/traits/Singleton.php';
 
 /**
  * Dummy Singleton for testing.
