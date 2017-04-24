@@ -21,7 +21,7 @@ class SingletonObject {
 /**
  * Test Singleton.
  *
- * @group dcycleacquia
+ * @group custom
  */
 class SingletonTest extends \PHPUnit_Framework_TestCase {
 

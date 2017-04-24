@@ -44,3 +44,14 @@ Importing the database
 You can generally develop without the database, but if you need it:
 
     ./scripts/import-database.sh /path/to/database.sql
+
+Updating an Acquia environment
+-----
+
+    git push origin master
+
+Then log into the Acquia system and run:
+
+    drush @dcycleacquia.dev en -y dcycleacquia_deploy
+    drush @dcycleacquia.dev updb -y
+    drush @dcycleacquia.dev cim -y vcs

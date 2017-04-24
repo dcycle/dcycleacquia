@@ -37,5 +37,5 @@ fi
 echo "Assuming Drupal is already running, because there is a users table with at least one entry."
 echo "Run the update script whether or not this is an initial deployment."
 drush en -y dcycleacquia_deploy
-drush cim -y vcs
 drush updb -y
+drush cim -y vcs

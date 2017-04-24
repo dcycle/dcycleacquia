@@ -16,4 +16,14 @@ function dcycleacquia_deploy_install() {
   // sync these instances via the config management system.
   // See also https://www.drupal.org/node/2133325
   dcycleacquia_deploy_set_uuid('d94dab3f-d4ee-410a-a9d9-dd628cfc50dc');
+
+  dcycleacquia_deploy_update_8001();
+}
+
+/**
+ * Remove shortcut links, see https://www.drupal.org/node/2638392.
+ */
+function dcycleacquia_deploy_update_8001() {
+  \Drupal::entityManager()
+    ->getStorage("shortcut_set")->load("default")->delete();
 }
