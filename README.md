@@ -55,3 +55,21 @@ Then log into the Acquia system and run:
     drush @dcycleacquia.dev en -y dcycleacquia_deploy
     drush @dcycleacquia.dev updb -y
     drush @dcycleacquia.dev cim -y vcs
+
+Troubleshooting
+-----
+
+On or before April 28th, 2017, Acquia seems to have added this code to their initial settings.php:
+
+    // Initialize install_profile to the Drupal distribution name detected by the Acquia Cloud installation process.
+    if (class_exists('Drupal') && defined('Drupal::CORE_COMPATIBILITY') && Drupal::CORE_COMPATIBILITY == '8.x') {
+     if (!isset($settings['install_profile'])) {
+        $settings['install_profile'] = 'lightning';
+      }
+    }
+
+If you are getting "Cannot use object of type stdClass as array in /var/www/html/core/includes/install.inc on line 284", you can delete that entire block of code, and instead put in settings.php:
+
+    $settings['install_profile'] = 'YOUR-INSTALL-PROFILE';
+
+Where YOUR-INSTALL-PROFILE is lightning or standard.
